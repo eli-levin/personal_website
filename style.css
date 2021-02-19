@@ -36,6 +36,8 @@ a {
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
     padding: 5px;
     text-decoration: none;
+    display: block;
+    padding: 0;
 }
 
 h2 {

@@ -69,12 +69,12 @@ var HueCycle = function (_React$Component) {
   return HueCycle;
 }(React.Component);
 
-var links = [{ link: "https://google.com", text: "👨🏻‍💻 AWS" }, { link: "https://google.com", text: "📱 Chess Vision" }, { link: "https://google.com", text: "🍔 Blog" }];
+var links = [{ link: "https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html", text: "👨🏻‍💻 AWS" }, { link: "https://chessvision.app", text: "📱 Chess Vision" }, { link: "https://www.linkedin.com/in/eli-levin-bb3804b5/", text: "🍔 Blog" }];
 
-var gbase = Math.floor(Math.random() * 181); //181 bc Math.random returns <1 and this will truncate
+var gbase = Math.floor(Math.random() * 180);
 var lst = [];
 for (var i = 0; i < links.length; i++) {
-  lst = [].concat(_toConsumableArray(lst), [React.createElement(HueCycle, { base: Math.min(gbase + (i + 1) * 2, 180),
+  lst = [].concat(_toConsumableArray(lst), [React.createElement(HueCycle, { base: gbase + (i + 1) * 2,
     link: links[i].link,
     text: links[i].text })]);
 }

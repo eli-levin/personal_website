@@ -1,4 +1,8 @@
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14,7 +18,7 @@ var HueCycle = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (HueCycle.__proto__ || Object.getPrototypeOf(HueCycle)).call(this, props));
 
-    _this.state = { degree: props.base }; //181 bc Math.random returns <1 and this will truncate
+    _this.state = { degree: props.base };
     return _this;
   }
 
@@ -50,26 +54,33 @@ var HueCycle = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return React.createElement('div', { 'class': 'hue-cycle', style: { backgroundColor: this.getHSLA() } });
+      return React.createElement(
+        'div',
+        { 'class': 'hue-cycle', style: { backgroundColor: this.getHSLA() } },
+        React.createElement(
+          'a',
+          { 'class': 'link', href: this.props.link },
+          this.props.text
+        )
+      );
     }
   }]);
 
   return HueCycle;
 }(React.Component);
 
-// ReactDOM.render(
-//   <HueCycle />,
-//   document.getElementById('root')
-// );
+var links = [{ link: "https://google.com", text: "👨🏻‍💻 AWS" }, { link: "https://google.com", text: "📱 Chess Vision" }, { link: "https://google.com", text: "🍔 Blog" }];
 
-var numbers = [1, 2, 3, 4];
-var gbase = Math.floor(Math.random() * 181);
-var listItems = numbers.map(function (n) {
-  return React.createElement(HueCycle, { base: Math.min(gbase + n * 2, 180) });
-});
+var gbase = Math.floor(Math.random() * 181); //181 bc Math.random returns <1 and this will truncate
+var lst = [];
+for (var i = 0; i < links.length; i++) {
+  lst = [].concat(_toConsumableArray(lst), [React.createElement(HueCycle, { base: Math.min(gbase + (i + 1) * 2, 180),
+    link: links[i].link,
+    text: links[i].text })]);
+}
 
 ReactDOM.render(React.createElement(
   'div',
   null,
-  listItems
+  lst
 ), document.getElementById('root'));

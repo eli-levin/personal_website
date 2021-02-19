@@ -1,7 +1,9 @@
+'use strict';
+
 class HueCycle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { degree: props.base }; //181 bc Math.random returns <1 and this will truncate
+    this.state = { degree: props.base };
   }
 
   tick() {
@@ -26,23 +28,27 @@ class HueCycle extends React.Component {
   render() {
     return (
       <div class="hue-cycle" style={{backgroundColor: this.getHSLA()}}>
+        <a class="link" href={this.props.link}>{this.props.text}</a>
       </div>
     );
   }
 }
 
-// ReactDOM.render(
-//   <HueCycle />,
-//   document.getElementById('root')
-// );
+const links = [
+  {link: "https://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html", text: "👨🏻‍💻 AWS"},
+  {link: "https://chessvision.app", text: "📱 Chess Vision"},
+  {link: "https://www.linkedin.com/in/eli-levin-bb3804b5/", text: "🍔 Blog"},
+];
 
-const numbers = [1, 2, 3, 4];
-const gbase = Math.floor(Math.random() * 181);
-const listItems = numbers.map((n) =>
-  <HueCycle base={Math.min(gbase+n*2, 180)} />
-);
+const gbase = Math.floor(Math.random() * 180);
+let lst = [];
+for (let i=0; i<links.length; i++) {
+  lst = [...lst, <HueCycle base={ gbase+(i+1)*2 }
+                           link={ links[i].link }
+                           text={ links[i].text } />]
+}
 
 ReactDOM.render(
-  <div>{listItems}</div>,
+  <div>{lst}</div>,
   document.getElementById('root')
 );
